@@ -13,6 +13,7 @@ import SVProgressHUD
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var errorField: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -22,6 +23,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
 
         self.emailField.delegate = self
         self.passwordField.delegate = self
+        errorField.text = "Invalid Email or Password"
+        errorField.isHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -33,6 +36,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         SVProgressHUD.show()
         Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (user, error) in
             if error != nil {
+                self.errorField.isHidden = false
+                SVProgressHUD.dismiss()
                 print("the error is: \(error)")
             }
             else {
