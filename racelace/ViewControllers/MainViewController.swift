@@ -32,8 +32,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //Location managing functions
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
         var speed: CLLocationSpeed = CLLocationSpeed()
         speed = locationManager.location!.speed
+        print("ooga")
         speedLabel.text = "Speed(m/s): \(speed)"
     }
     
